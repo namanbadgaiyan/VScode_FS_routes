@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+  <div id="main">
+    <div id="owerflow">
+      <form id="updatekaid" action="/update/<%= files.name%>">
+        <input type="text" name="yahalick" placeholder="name">
+        <input type="submit" value="YEH SAHI HAI??" name="submitjohorha">
+      </form>      
+    </div>
+    <div id="left">
+      <div class="folder">
+        <h4><i class="ri-arrow-down-s-line"></i><%= folder%></h4>
+        <div class="icons">
+          <i id="create" class="ri-file-3-line"></i>
+          <i id="folding" class="ri-folder-3-fill"></i>
+          <a href="/" style="text-decoration: none; color: #fff;"><i class="ri-restart-line"></i></a>
+          <i class="ri-file-copy-2-line"></i>
+        </div>
+      </div>
+      <form action="/filing" id="textcreate" style="display: none;">
+        <input type="text" name="name" placeholder="CreateFile">
+      </form>
+      <form action="/fooling" id="textmaking" style="display: none;">
+        <input type="text" name="name" placeholder="Createfolder">
+      </form>
+      <div class="files">
+        <% files.forEach(function(file){ %>
+          <div class="file">
+            <div style="display: flex;align-items: center; gap: 0.5vw;" id="filename">
+              <i class="ri-arrow-right-s-line"></i>
+              <% if(file.isDirectory()){ %>
+                <span><i style="color: blue;" class="ri-folder-3-line"></i></span>
+                <a href="/" style="display: initial;"><h4><%= file.name %></h4></a>
+                <% }else{ %>
+                  <span><i style="color: yellow;" class="ri-file-3-line"></i></span>
+                  <a href="/file/<%= file.name%>" style="display: initial;"><h4><%= file.name %></h4></a>
+                  <% } %>
+              <form action="/update/<%= file.name %>" method="post" style="position: absolute; display: none; color: #fff;">
+                <input type="text" name="updatingfilename" value="<%= file.name %>" id="updatename" style="margin-left: 3vw; color: #fff; background: transparent; outline: none; font-size: medium; padding: 1px; min-width: 14vw;" >
+              </form>
+            </div>
+            <div class="icons">
+              <i id="editdaicon" class="ri-edit-2-line"></i>
+
+              <% if(file.isDirectory()){ %>
+                <a href="/delete/folder/<%= file.name%>"><i class="ri-delete-bin-line"></i></a>
+              <% }else { %>
+                  <a href="/delete/file/<%= file.name%>"><i class="ri-delete-bin-line"></i></a>
+              <% } %>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+    <div id="right">
+      <div id="div" style="display: flex; align-items: center; justify-content: center; height: 90vh; flex-direction: column;">
+        <h1 style="font-size: 5vw;">📂</h1>
+        <h3 style="color:rgb(40, 40, 165); font-size: 3vw;">No file selected</h3>
+      </div>
+    </div>
+  </div>
+  <script src="/javascripts/script.js"></script>
+</body>
+</html>   
